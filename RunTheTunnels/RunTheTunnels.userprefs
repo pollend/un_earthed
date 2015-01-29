@@ -1,0 +1,18 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\QuadTree\QuadTree.cs">
+    <Files>
+      <File FileName="Assets\Scripts\QuadTree\QuadTree.cs" Line="31" Column="1" />
+      <File FileName="Assets\Scripts\QuadTree\Bucket.cs" Line="132" Column="1" />
+      <File FileName="Assets\Scripts\QuadTree\Basic.cs" Line="18" Column="1" />
+      <File FileName="Assets\Scripts\Dirt.cs" Line="17" Column="30" />
+      <File FileName="Assets\Scripts\Player.cs" Line="82" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="C:\Users\Michael\Desktop\un_earthed\RunTheTunnels\Assets\Scripts\QuadTree\Basic.cs" line="16" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.QuadTree;
 
 public class Player : MonoBehaviour {
 
@@ -76,6 +77,8 @@ public class Player : MonoBehaviour {
 	void BreakBlocks() {
 //		if ((Input.GetKey(KeyCode.W) && digging) || !networkView.isMine) {
 		if (Input.GetKey(KeyCode.W) && digging) {
+
+            GameObject.Find("Chunk").GetComponent<QuadTree>().Intersect(new Rect(transform.position.x,transform.position.y,20,20),new Basic().GetType());
 			for (int i = 0; i < triggeredBlocks.Count; i++) {
 				triggeredBlocks[i].Break();
 			}

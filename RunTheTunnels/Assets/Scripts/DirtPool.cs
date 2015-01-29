@@ -28,7 +28,8 @@ public class DirtPool : MonoBehaviour {
 	}
 
 	public static GameObject PopPool(Vector3 position) {
-		if (dirtPool.Count > 0) {
+		
+        if (dirtPool.Count > 0) {
 			GameObject dirt = dirtPool.Pop();
 			dirt.transform.position = position;
 			dirt.renderer.enabled = true;

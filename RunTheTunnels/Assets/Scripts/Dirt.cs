@@ -23,7 +23,7 @@ public class Dirt : MonoBehaviour {
 	}
 
 	public void Break() {
-		if (breakable) {
+		/*if (breakable) {
 			if (size >= 0.25f) {
 				if (size == 1) {
 					int x = (int)transform.position.x;
@@ -33,17 +33,17 @@ public class Dirt : MonoBehaviour {
 				}
 				for (int x = 0; x < 2; x++) {
 					for (int y = 0; y < 2; y++) {
-						GameObject newDirt = DirtPool.PopPool(new Vector3((transform.position.x-(size/4f))+(x*(size/2f)), (transform.position.y-(size/4f))+(y*(size/2f)), 0));
-						newDirt.GetComponent<Dirt>().SetAttributes(size/2f, darkness+1);
+						//GameObject newDirt = DirtPool.PopPool(new Vector3((transform.position.x-(size/4f))+(x*(size/2f)), (transform.position.y-(size/4f))+(y*(size/2f)), 0));
+						//newDirt.GetComponent<Dirt>().SetAttributes(size/2f, darkness+1);
 					}
 				}
 			}
 
-			renderer.enabled = false;
-			collider2D.enabled = false;
-			SetAttributes(1,0);
+			//renderer.enabled = false;
+			///collider2D.enabled = false;
+			///SetAttributes(1,0);
 			DirtPool.PushPool(gameObject);
-		}
+		}*/
 	}
 
 	public void SetUnbreakable() {

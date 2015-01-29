@@ -71,6 +71,7 @@ public class Player : MonoBehaviour {
 			} else {
 				rigidbody2D.velocity = (Input.GetAxis("Vertical") * transform.up) * backMoveSpeed;
 			}
+		GameObject.Find("Chunk").GetComponent<QuadTree>().Intersect(this.collider2D,typeof(Bucket_empty));
 //		}
 	}
 
@@ -78,7 +79,7 @@ public class Player : MonoBehaviour {
 //		if ((Input.GetKey(KeyCode.W) && digging) || !networkView.isMine) {
 		if (Input.GetKey(KeyCode.W) && digging) {
 
-            GameObject.Find("Chunk").GetComponent<QuadTree>().Intersect(new Rect(transform.position.x,transform.position.y,20,20),new Basic().GetType());
+            
 			for (int i = 0; i < triggeredBlocks.Count; i++) {
 				triggeredBlocks[i].Break();
 			}
@@ -98,6 +99,8 @@ public class Player : MonoBehaviour {
 			if (Time.time - lastTrigger > .4f)
 				digging = false;
 			lastTrigger = Time.time;
+
+
 			triggeredBlocks.Add(col.gameObject.GetComponent<Dirt>());
 		}
 	}

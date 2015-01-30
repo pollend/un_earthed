@@ -31,6 +31,7 @@ namespace Assets.Scripts.QuadTree
  
 		public void Intersect(Collider2D collider, Type bucket)
 		{
+
 			
 			_base_bucket.Divide(collider, bucket);
 			

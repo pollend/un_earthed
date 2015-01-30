@@ -33,7 +33,7 @@ namespace Assets.Scripts.QuadTree
 
 		private Bounds _convertFromRect(Rect r)
 		{
-			return new Bounds (new Vector3 (r.center.x, r.center.y, -1), new Vector3 (r.width, r.height,2));
+			return new Bounds (new Vector3 (r.center.x, r.center.y, -1), new Vector3 (r.width+.5f, r.height+.5f,2));
 		}
 
 		public void Debug()
@@ -48,8 +48,8 @@ namespace Assets.Scripts.QuadTree
 		
 			_top_left_rectangle = new Rect(_rect.xMin, _rect.yMin, _rect.width / 2.0f, _rect.height / 2.0f);
 			_top_right_rectangle = new Rect(_rect.center.x, _rect.yMin, _rect.width / 2.0f, _rect.height / 2.0f);
-			_bottom_left_rectangle = new Rect(_rect.xMin, _rect.center.y, _rect.width / 2.0f, _rect.height / 2.0f);
-			_bottom_right_rectangle = new Rect(_rect.center.x, _rect.center.y, _rect.width / 2.0f, _rect.height / 2.0f);
+			_bottom_right_rectangle = new Rect(_rect.xMin, _rect.center.y, _rect.width / 2.0f, _rect.height / 2.0f);
+			_bottom_left_rectangle = new Rect(_rect.center.x, _rect.center.y, _rect.width / 2.0f, _rect.height / 2.0f);
        
         }
         
@@ -81,7 +81,6 @@ namespace Assets.Scripts.QuadTree
 
 					if (((object)_top_left) == null) 
 					{
-
 						_top_left = (Bucket)Activator.CreateInstance (GetType());
 						_top_left.SetRectangle(_top_left_rectangle);
 						_top_left.Instantiate ();	
@@ -102,10 +101,7 @@ namespace Assets.Scripts.QuadTree
 						_bottom_left.Instantiate ();
 					}
 
-
-
-
-					if (_convertFromRect (_top_left_rectangle).Intersects (collider.bounds)) 
+					if (_convertFromRect(_top_left_rectangle).Intersects (collider.bounds)) 
 					{
 						if (!_is_divided) 
 						{
@@ -129,7 +125,7 @@ namespace Assets.Scripts.QuadTree
 						}
 
 					} 
-					else if (_convertFromRect (_top_right_rectangle).Intersects (collider.bounds)) 
+					if (_convertFromRect (_top_right_rectangle).Intersects (collider.bounds)) 
 					{
 						if (!_is_divided) 
 						{
@@ -153,7 +149,7 @@ namespace Assets.Scripts.QuadTree
 						}
 
 					} 
-					else if (_convertFromRect (_bottom_left_rectangle).Intersects (collider.bounds)) 
+					if (_convertFromRect (_bottom_left_rectangle).Intersects (collider.bounds)) 
 					{
 						if (!_is_divided) 
 						{
@@ -178,7 +174,7 @@ namespace Assets.Scripts.QuadTree
 
 
 					} 
-					else if (_convertFromRect (_bottom_right_rectangle).Intersects (collider.bounds))
+					 if (_convertFromRect (_bottom_right_rectangle).Intersects (collider.bounds))
 					{
 						if (!_is_divided) 
 						{
@@ -203,13 +199,7 @@ namespace Assets.Scripts.QuadTree
 
 
 					} 
-					else 
-					{
-
-						if (!_is_instaniated)
-						_instantiate (new Vector3 (_rect.center.x, _rect.center.y, 0), _rect.width);
-					}
-
+			
 
 					if (((object)_top_left) != null)_top_left.Clean ();
 					if (((object)_top_right) != null)_top_right.Clean ();
@@ -218,13 +208,7 @@ namespace Assets.Scripts.QuadTree
 					_is_divided = true;
 				}
 			} 
-			else 
-			{
-				if (!_is_instaniated)
-				{
-					this._instantiate (new Vector3 (_rect.center.x, _rect.center.y, 0), _rect.width);
-				}
-			}
+		
 			return true;
         }
 

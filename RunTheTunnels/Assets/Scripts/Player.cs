@@ -58,6 +58,7 @@ public class Player : MonoBehaviour {
 				Quaternion destAngle = Quaternion.AngleAxis(rotateDestination, Vector3.forward);
 				transform.rotation = Quaternion.RotateTowards(transform.rotation, destAngle, rotateSpeed*Time.deltaTime);
 			}
+	
 //		} else {
 //			syncOffset += Time.deltaTime;
 //			transform.position = Vector3.Lerp(syncStartPosition, syncEndPosition, syncOffset / syncDelay);
@@ -100,16 +101,18 @@ public class Player : MonoBehaviour {
 				digging = false;
 			lastTrigger = Time.time;
 
-
+		
 			triggeredBlocks.Add(col.gameObject.GetComponent<Dirt>());
 		}
 	}
 	void OnTriggerExit2D (Collider2D col) {
+
 		if (col.gameObject.tag == "dirt") {
 			Dirt tempDirt = col.gameObject.GetComponent<Dirt>();
 			if (triggeredBlocks.Contains(tempDirt))
 				triggeredBlocks.Remove(tempDirt);
 		}
+
 	}
 
 	IEnumerator StartDigging() {

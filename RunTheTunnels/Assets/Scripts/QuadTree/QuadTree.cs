@@ -8,7 +8,7 @@ namespace Assets.Scripts.QuadTree
 {
     public class QuadTree : MonoBehaviour
     {
-        public const float MAX_BUCKET_SIZE = .5f;
+        public const float MAX_BUCKET_SIZE = .3f;
         
         private Bucket _base_bucket;
 
@@ -31,8 +31,6 @@ namespace Assets.Scripts.QuadTree
  
 		public void Intersect(Collider2D collider, Type bucket)
 		{
-
-			
 			_base_bucket.Divide(collider, bucket);
 			
 		}

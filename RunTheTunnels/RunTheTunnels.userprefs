@@ -1,21 +1,16 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\QuadTree\QuadTree.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\QuadTree\Bucket.cs">
     <Files>
-      <File FileName="Assets\Scripts\QuadTree\Basic.cs" Line="27" Column="1" />
-      <File FileName="Assets\Scripts\QuadTree\QuadTree.cs" Line="11" Column="48" />
-      <File FileName="Assets\Scripts\QuadTree\Bucket.cs" Line="51" Column="27" />
-      <File FileName="Assets\Scripts\Player.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\QuadTree\Bucket_empty.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\QuadTree\Bucket_Dirt.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\NetworkManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Dirt.cs" Line="14" Column="4" />
+      <File FileName="Assets\Scripts\QuadTree\Bucket.cs" Line="100" Column="15" />
+      <File FileName="Assets\Scripts\QuadTree\QuadTree.cs" Line="33" Column="4" />
+      <File FileName="Assets\Scripts\QuadTree\Bucket_Dirt.cs" Line="16" Column="61" />
+      <File FileName="Assets\Scripts\Player.cs" Line="115" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches>
-    <Watch file="Assets\Scripts\QuadTree\Bucket.cs" line="92" offsetX="808" offsetY="1456" expression="this" liveUpdate="False" />
-    <Watch file="Assets\Scripts\QuadTree\QuadTree.cs" line="34" offsetX="458" offsetY="528" expression="_base_bucket" liveUpdate="False" />
-  </MonoDevelop.Ide.DebuggingService.PinnedWatches>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

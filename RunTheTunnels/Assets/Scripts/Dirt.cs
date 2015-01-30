@@ -11,6 +11,7 @@ public class Dirt : MonoBehaviour {
 	void Awake() {
 		size = 1;
 		darkness = 0;
+	 	
 	}
 
 	public void SetAttributes (float _size, float _darkness) {

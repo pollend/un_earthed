@@ -10,17 +10,17 @@ namespace Assets.Scripts.QuadTree
     {
 
         private GameObject _dirt;
-        protected override void _instantiate(Vector3 position, float size)
+        protected override void Instantiate(Vector3 position, float size)
         {
 			_dirt =   MonoBehaviour.Instantiate(GameObject.Find("Dirt"), position, Quaternion.Euler(0,0,0)) as GameObject;
             _dirt.GetComponent<Dirt>().SetAttributes(size , 1);
-            base._instantiate(position,size);
+            base.Instantiate(position,size);
         }
 
-        protected override void _unInstantiate()
+        protected override void UnInstantiate()
         {
 			MonoBehaviour.Destroy (_dirt);
-            base._unInstantiate();
+            base.UnInstantiate();
         }
     }
 }

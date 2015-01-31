@@ -9,20 +9,20 @@ namespace Assets.Scripts.QuadTree
 {
     public class Bucket 
     {
-        private Bucket _top_left = null;
-        private Bucket _top_right = null;
-        private Bucket _bottom_left = null;
-        private Bucket _bottom_right = null;
+        private Bucket topLeft = null;
+        private Bucket topRight = null;
+        private Bucket bottomLeft = null;
+        private Bucket bottomRight = null;
 
-        private Rect _rect;
+        private Rect rect;
 
-        private Rect _top_left_rectangle;
-		private Rect _top_right_rectangle;
-		private Rect _bottom_left_rectangle;
-		private Rect _bottom_right_rectangle;
+        private Rect topLeftRectangle;
+		private Rect topRightRectangle;
+		private Rect bottomLeftRectangle;
+		private Rect bottomRightRectangle;
 
-		private bool _is_instaniated = false;
-		private bool _is_divided = false;
+		private bool isInstaniated = false;
+		private bool isDivided = false;
 
         public Bucket()
         {
@@ -30,26 +30,20 @@ namespace Assets.Scripts.QuadTree
         }
 
 
-
 		private Bounds _convertFromRect(Rect r)
 		{
 			return new Bounds (new Vector3 (r.center.x, r.center.y, -1), new Vector3 (r.width*1.3f, r.height*1.3f,2));
 		}
 
-		public void Debug()
-		{
-		
-		}
-	
 
         public void SetRectangle(Rect rectangle)
         {
-            _rect = new Rect(rectangle);
+            rect = new Rect(rectangle);
 		
-			_top_left_rectangle = new Rect(_rect.xMin, _rect.yMin, _rect.width / 2.0f, _rect.height / 2.0f);
-			_top_right_rectangle = new Rect(_rect.center.x, _rect.yMin, _rect.width / 2.0f, _rect.height / 2.0f);
-			_bottom_right_rectangle = new Rect(_rect.xMin, _rect.center.y, _rect.width / 2.0f, _rect.height / 2.0f);
-			_bottom_left_rectangle = new Rect(_rect.center.x, _rect.center.y, _rect.width / 2.0f, _rect.height / 2.0f);
+			topLeftRectangle = new Rect(rect.xMin, rect.yMin, rect.width / 2.0f, rect.height / 2.0f);
+			topRightRectangle = new Rect(rect.center.x, rect.yMin, rect.width / 2.0f, rect.height / 2.0f);
+			bottomRightRectangle = new Rect(rect.xMin, rect.center.y, rect.width / 2.0f, rect.height / 2.0f);
+			bottomLeftRectangle = new Rect(rect.center.x, rect.center.y, rect.width / 2.0f, rect.height / 2.0f);
        
         }
         
@@ -69,107 +63,99 @@ namespace Assets.Scripts.QuadTree
 
         }
 
-		private void _instantiage_buckets()
+		private void InstantiageBuckets()
 		{
-			if(_is_instaniated)
-				_unInstantiate();
-			
-			if (((object)_top_left) == null) 
+			UnInstantiateBucket();
+			if (((object)topLeft) == null) 
 			{
-				_top_left = (Bucket)Activator.CreateInstance (GetType());
-				_top_left.SetRectangle(_top_left_rectangle);
-				_top_left.Instantiate ();	
+				topLeft = (Bucket)Activator.CreateInstance (GetType());
+				topLeft.SetRectangle(topLeftRectangle);
+				topLeft.InstantiateBucket();	
 			}
-			if (((object)_top_right) == null) {
-				_top_right = (Bucket)Activator.CreateInstance (GetType());
-				_top_right.SetRectangle(_top_right_rectangle);
-				_top_right.Instantiate ();
+			if (((object)topRight) == null) {
+				topRight = (Bucket)Activator.CreateInstance (GetType());
+				topRight.SetRectangle(topRightRectangle);
+				topRight.InstantiateBucket();
 			}
-			if (((object)_bottom_right) == null) {
-				_bottom_right = (Bucket)Activator.CreateInstance (GetType());
-				_bottom_right.SetRectangle(_bottom_right_rectangle);
-				_bottom_right.Instantiate ();
+			if (((object)bottomRight) == null) {
+				bottomRight = (Bucket)Activator.CreateInstance (GetType());
+				bottomRight.SetRectangle(bottomRightRectangle);
+				bottomRight.InstantiateBucket();
 			}
-			if (((object)_bottom_left) == null) {
-				_bottom_left = (Bucket)Activator.CreateInstance (GetType());
-				_bottom_left.SetRectangle(_bottom_left_rectangle);
-				_bottom_left.Instantiate ();
+			if (((object)bottomLeft) == null) {
+				bottomLeft = (Bucket)Activator.CreateInstance (GetType());
+				bottomLeft.SetRectangle(bottomLeftRectangle);
+				bottomLeft.InstantiateBucket();
 			}
 		}
 
-		private bool _process_bucket(Type bucket_type,Rect bucket_size, Bucket main_bucket, Bucket b1,Bucket b2,Bucket b3)
+		private bool ProcessBucket(Type bucket_type,Rect bucket_size, Bucket main_bucket, Bucket b1,Bucket b2,Bucket b3)
 		{
-			if (!_is_divided) 
+			if (!isDivided) 
 			{
-				b1.Instantiate ();
-				b2.Instantiate ();
-				b3.Instantiate ();
-				_is_divided = true;
+				b1.Instantiate (new Vector3(rect.center.x,rect.center.y, 0), rect.width);
+				b2.Instantiate (new Vector3(rect.center.x,rect.center.y, 0), rect.width);
+				b3.Instantiate (new Vector3(rect.center.x,rect.center.y, 0), rect.width);
+				isDivided = true;
 			}
 			if(bucket_size.width < QuadTree.MAX_BUCKET_SIZE)
 			{
-				main_bucket._unInstantiate();
+				main_bucket.UnInstantiate();
 				
 				main_bucket = (Bucket)Activator.CreateInstance (bucket_type);
 				main_bucket.SetRectangle(bucket_size);
-				main_bucket.Instantiate ();
+				main_bucket.Instantiate (new Vector3(rect.center.x,rect.center.y, 0), rect.width);
 				return true;
 			}
 			return false;
 		}
-	
+
+
+
 		public bool Divide(Collider2D collider, Type bucket_type)
 		{
-			_instantiage_buckets ();
-
-			if (_convertFromRect(_bottom_right_rectangle).Intersects (collider.bounds))
+			if (_convertFromRect(bottomRightRectangle).Intersects (collider.bounds))
 			{
-				if(!_process_bucket(bucket_type,_bottom_right_rectangle,_bottom_right,_top_left,_top_right,_bottom_left))
-					_bottom_right.Divide (collider, bucket_type);
+				if(!ProcessBucket(bucket_type,bottomRightRectangle,bottomRight,topLeft,topRight,bottomLeft))
+					bottomRight.Divide (collider, bucket_type);
 			} 
-			if (_convertFromRect(_top_left_rectangle).Intersects (collider.bounds)) 
+			if (_convertFromRect(topLeftRectangle).Intersects (collider.bounds)) 
 			{
-				if(!_process_bucket(bucket_type,_top_left_rectangle,_top_left,_top_right,_bottom_right,_bottom_left))
-					_top_left.Divide (collider, bucket_type);
+				if(!ProcessBucket(bucket_type,topLeftRectangle,topLeft,topRight,bottomRight,bottomLeft))
+					topLeft.Divide (collider, bucket_type);
 			} 
-			if (_convertFromRect (_bottom_left_rectangle).Intersects (collider.bounds)) 
+			if (_convertFromRect (bottomLeftRectangle).Intersects (collider.bounds)) 
 			{
-				if(!_process_bucket(bucket_type,_bottom_left_rectangle,_bottom_left,_top_left,_top_right,_bottom_right))
-					_bottom_left.Divide (collider, bucket_type);
+				if(!ProcessBucket(bucket_type,bottomLeftRectangle,bottomLeft,topLeft,topRight,bottomRight))
+					bottomLeft.Divide (collider, bucket_type);
 			} 
-			if (_convertFromRect (_top_right_rectangle).Intersects (collider.bounds)) 
+			if (_convertFromRect (topRightRectangle).Intersects (collider.bounds)) 
 			{
-				if(!_process_bucket(bucket_type,_top_right_rectangle,_top_right,_top_left,_bottom_right,_bottom_left))
-					_top_right.Divide (collider, bucket_type);
+				if(!ProcessBucket(bucket_type,topRightRectangle,topRight,topLeft,bottomRight,bottomLeft))
+					topRight.Divide (collider, bucket_type);
 			} 
 
 			return true;
         }
 
-
-
-
-		public void Instantiate()
+		public void InstantiateBucket()
 		{
-			if(!_is_instaniated)
-				_instantiate(new Vector3(_rect.center.x,_rect.center.y, 0), _rect.width);
+			if(!isInstaniated)
+			Instantiate (new Vector3 (rect.center.x, rect.center.y, 0), rect.width);
+			isInstaniated = true;
 		}
 
-        protected virtual void _instantiate(Vector3 position, float size)
-        {
-			_is_instaniated = true;
-        }
+		public void UnInstantiateBucket()
+		{
+			if(isInstaniated)
+			UnInstantiate ();
+			isInstaniated = false;
+		}
 
-        protected virtual void _unInstantiate()
-        {
-			_is_instaniated = false;
-        }
+		protected virtual float GetDamageFactor(){return 1.0f;}
+		protected virtual void Instantiate (Vector3 position, float size){}
+		protected virtual void UnInstantiate (){}
 
-        public bool Intersect(Rect rectangle)
-        {
-
-           return rectangle.Overlaps(_rect);
-        }
     
     }
 }

@@ -51,6 +51,7 @@
      <Compile Include="Assets\Scripts\Dirt.cs" />
      <Compile Include="Assets\Scripts\DirtPool.cs" />
      <Compile Include="Assets\Scripts\Global.cs" />
+     <Compile Include="Assets\Scripts\Intersection.cs" />
      <Compile Include="Assets\Scripts\Manager.cs" />
      <Compile Include="Assets\Scripts\NetworkManager.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />

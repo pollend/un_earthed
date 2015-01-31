@@ -72,7 +72,7 @@ public class Player : MonoBehaviour {
 			} else {
 				rigidbody2D.velocity = (Input.GetAxis("Vertical") * transform.up) * backMoveSpeed;
 			}
-		GameObject.Find("Chunk").GetComponent<QuadTree>().Intersect(this.collider2D,typeof(Bucket_empty));
+		GameObject.Find("Chunk").GetComponent<QuadTree>().GetBucket().Divide(this.transform.position,.8f,typeof(Bucket_empty));
 //		}
 	}
 

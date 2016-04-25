@@ -66,9 +66,9 @@ public class Player : MonoBehaviour {
 	void FixedUpdate () {
 //		if (networkView.isMine) {
 			if (Input.GetAxis("Vertical") >= 0) {
-				rigidbody2D.velocity = (Input.GetAxis("Vertical") * transform.up) * moveSpeed;
+				GetComponent<Rigidbody2D>().velocity = (Input.GetAxis("Vertical") * transform.up) * moveSpeed;
 			} else {
-				rigidbody2D.velocity = (Input.GetAxis("Vertical") * transform.up) * backMoveSpeed;
+				GetComponent<Rigidbody2D>().velocity = (Input.GetAxis("Vertical") * transform.up) * backMoveSpeed;
 			}
 //		}
 	}

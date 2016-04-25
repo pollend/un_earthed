@@ -39,8 +39,8 @@ public class Dirt : MonoBehaviour {
 				}
 			}
 
-			renderer.enabled = false;
-			collider2D.enabled = false;
+			GetComponent<Renderer>().enabled = false;
+			GetComponent<Collider2D>().enabled = false;
 			SetAttributes(1,0);
 			DirtPool.PushPool(gameObject);
 		}

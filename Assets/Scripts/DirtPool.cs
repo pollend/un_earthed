@@ -16,8 +16,8 @@ public class DirtPool : MonoBehaviour {
 	IEnumerator CreatePool() {
 		for (int i = 0; i < poolSize; i++) {
 			GameObject dirt = Instantiate(dirtObj, transform.position, transform.rotation) as GameObject;
-			dirt.renderer.enabled = false;
-			dirt.collider2D.enabled = false;
+			dirt.GetComponent<Renderer>().enabled = false;
+			dirt.GetComponent<Collider2D>().enabled = false;
 			PushPool(dirt);
 			wait++;
 			if (wait >= 5) {
@@ -31,8 +31,8 @@ public class DirtPool : MonoBehaviour {
 		if (dirtPool.Count > 0) {
 			GameObject dirt = dirtPool.Pop();
 			dirt.transform.position = position;
-			dirt.renderer.enabled = true;
-			dirt.collider2D.enabled = true;
+			dirt.GetComponent<Renderer>().enabled = true;
+			dirt.GetComponent<Collider2D>().enabled = true;
 			return dirt;
 		} else {
 			Debug.Log("The pool is empty..");
